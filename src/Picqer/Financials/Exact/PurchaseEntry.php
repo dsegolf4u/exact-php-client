@@ -7,9 +7,9 @@ class PurchaseEntry extends Model
 
     protected $primaryKey = 'EntryID';
 
-    protected $purchaseEntryLines = [];
+    protected $purchaseEntryLines = array();
 
-    protected $fillable = [
+    protected $fillable = array(
         'EntryID',
         'BatchNumber',
         'Currency',
@@ -32,13 +32,13 @@ class PurchaseEntry extends Model
         'Supplier',
         'VATAmountFC',
         'YourRef',
-    ];
+    );
 
     public function addItem(array $array)
     {
         if ( ! isset($this->attributes['PurchaseEntryLines']) || $this->attributes['PurchaseEntryLines'] == null)
         {
-            $this->attributes['PurchaseEntryLines'] = [];
+            $this->attributes['PurchaseEntryLines'] = array();
         }
         if ( ! isset($array['LineNumber']))
         {

@@ -43,7 +43,7 @@ class Connection {
         return $this->client;
     }
 
-    public function get($url, array $params = [])
+    public function get($url, array $params = array())
     {
         if ($url !== 'current/Me') $this->addDivisionNumberToApiUrl();
 

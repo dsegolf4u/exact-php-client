@@ -5,9 +5,9 @@ trait Findable
 
     public function find($id)
     {
-        $result = $this->connection()->get($this->url, [
+        $result = $this->connection()->get($this->url, array(
             '$filter' => $this->primaryKey . " eq guid'$id'"
-        ]);
+        ));
 
         return new self($this->connection(), $result);
     }
@@ -15,9 +15,9 @@ trait Findable
 
     public function filter($filter, $expand = '', $select = '')
     {
-        $request = [
+        $request = array(
             '$filter' => $filter
-        ];
+        );
         if (strlen($expand) > 0) {
             $request['$expand'] = $expand;
         }
@@ -30,7 +30,7 @@ trait Findable
         // If we have one result which is not an assoc array, make it the first element of an array for the
         // collectionFromResult function so we always return a collection from filter
         if ((bool) count(array_filter(array_keys($result), 'is_string'))) {
-            $result = [ $result ];
+            $result = array($result);
         }
 
         return $this->collectionFromResult($result);
@@ -47,7 +47,7 @@ trait Findable
 
     public function collectionFromResult($result)
     {
-        $collection = [ ];
+        $collection = array();
         foreach ($result as $r) {
             $collection[] = new self($this->connection(), $r);
         }
