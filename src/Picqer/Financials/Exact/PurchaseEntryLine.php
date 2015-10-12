@@ -5,7 +5,7 @@ class PurchaseEntryLine extends Model
     use Query\Findable;
     use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'ID',
         'AmountFC',
         'Asset',
@@ -24,7 +24,7 @@ class PurchaseEntryLine extends Model
         'VATBaseAmountFC',
         'VATCode',
         'VATPercentage',
-    ];
+    );
 
     protected $url = 'purchaseentry/PurchaseEntryLines';
 

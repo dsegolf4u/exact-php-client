@@ -6,7 +6,7 @@ class SalesInvoiceLine extends Model
     use Query\Findable;
     use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'ID',
         'AmountDC',
         'AmountFC',
@@ -48,7 +48,7 @@ class SalesInvoiceLine extends Model
         'VATCode',
         'VATCodeDescription',
         'VATPercentage'
-    ];
+    );
 
     protected $url = 'salesinvoice/SalesInvoiceLines';
 

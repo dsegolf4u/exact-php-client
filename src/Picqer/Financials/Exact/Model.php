@@ -11,12 +11,12 @@ abstract class Model
     /**
      * @var array The model's attributes
      */
-    protected $attributes = [ ];
+    protected $attributes = array();
 
     /**
      * @var array The model's fillable attributes
      */
-    protected $fillable = [ ];
+    protected $fillable = array();
 
     /**
      * @var string The URL endpoint of this model
@@ -29,7 +29,7 @@ abstract class Model
     protected $primaryKey = 'ID';
 
 
-    public function __construct(Connection $connection, array $attributes = [ ])
+    public function __construct(Connection $connection, array $attributes = array())
     {
         $this->connection = $connection;
         $this->fill($attributes);

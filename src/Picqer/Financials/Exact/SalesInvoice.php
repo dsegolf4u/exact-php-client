@@ -8,7 +8,7 @@ class SalesInvoice extends Model
 
     protected $primaryKey = 'InvoiceID';
 
-    protected $fillable = [
+    protected $fillable = array(
         'InvoiceID',
         'AmountDC',
         'AmountFC',
@@ -57,7 +57,7 @@ class SalesInvoice extends Model
         'VATAmountDC',
         'VATAmountFC',
         'YourRef'
-    ];
+    );
 
     protected $url = 'salesinvoice/SalesInvoices';
 
