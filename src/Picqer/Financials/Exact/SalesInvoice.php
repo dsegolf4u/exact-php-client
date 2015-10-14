@@ -3,8 +3,8 @@
 class SalesInvoice extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
     protected $primaryKey = 'InvoiceID';
 

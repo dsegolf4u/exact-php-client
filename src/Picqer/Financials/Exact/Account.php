@@ -3,10 +3,10 @@
 class Account extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'ID',
         'Accountant',
         'AccountManager',
@@ -125,7 +125,7 @@ class Account extends Model
         'VATLiability',
         'VATNumber',
         'Website'
-    ];
+    );
 
     protected $url = 'crm/Accounts';
 

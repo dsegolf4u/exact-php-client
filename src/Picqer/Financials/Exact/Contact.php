@@ -3,10 +3,10 @@
 class Contact extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'Account',
         'AccountIsCustomer',
         'AccountIsSupplier',
@@ -25,7 +25,7 @@ class Contact extends Model
         'HID',
         'AccountMainContact',
         'IsMainContact'
-    ];
+    );
 
     protected $url = 'crm/Contacts';
 

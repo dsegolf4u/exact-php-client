@@ -3,7 +3,7 @@
 class Me extends Model
 {
 
-    protected $fillable = [
+    protected $fillable = array(
         'CurrentDivision',
         'FullName',
         'PictureUrl',
@@ -21,7 +21,7 @@ class Me extends Model
         'Phone',
         'PhoneExtension',
         'Mobile'
-    ];
+    );
 
 
     public function find()

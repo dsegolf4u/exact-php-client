@@ -3,8 +3,8 @@
 class SalesInvoiceLine extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
     protected $fillable = array(
         'ID',
