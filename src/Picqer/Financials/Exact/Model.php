@@ -167,4 +167,66 @@ abstract class Model
         return $this->connection()->delete($this->url . "(guid'$primarykey')");
     }
 
+
+    public function find($id)
+    {
+        $result = $this->connection()->get($this->url, array(
+            '$filter' => $this->primaryKey . " eq guid'$id'"
+        ));
+
+        return new self($this->connection(), $result);
+    }
+
+
+    public function filter($filter, $expand = '', $select = '')
+    {
+        $request = array(
+            '$filter' => $filter
+        );
+        if (strlen($expand) > 0) {
+            $request['$expand'] = $expand;
+        }
+        if (strlen($select) > 0) {
+            $request['$select'] = $select;
+        }
+
+        $result = $this->connection()->get($this->url, $request);
+
+        // If we have one result which is not an assoc array, make it the first element of an array for the
+        // collectionFromResult function so we always return a collection from filter
+        if ((bool) count(array_filter(array_keys($result), 'is_string'))) {
+            $result = array($result);
+        }
+
+        return $this->collectionFromResult($result);
+    }
+
+
+    public function get()
+    {
+        $result = $this->connection()->get($this->url);
+
+        return $this->collectionFromResult($result);
+    }
+
+    public function getByModel($model)
+    {
+        $result = $this->connection()->get($this->url);
+
+        return $this->collectionFromResult($result, $model);
+    }
+
+    public function collectionFromResult($result, $model=null)
+    {
+        if ($model==null)
+            $model = get_class($this);
+
+        $collection = array();
+        foreach ($result as $r) {
+            $collection[] = new $model($this->connection(), $r);
+        }
+
+        return $collection;
+    }
+
 }

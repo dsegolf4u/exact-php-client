@@ -3,10 +3,10 @@
 class Item extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'ID',
         'Class_01',
         'Class_02',
@@ -92,7 +92,7 @@ class Item extends Model
         'StartDate',
         'Unit',
         'UnitDescription'
-    ];
+    );
 
     protected $url = 'logistics/Items';
 

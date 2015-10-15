@@ -3,16 +3,16 @@
 class Journal extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'Code',
         'Division',
         'Description',
         'ID',
         'Type',
-    ];
+    );
 
     protected $url = 'financial/Journals';
 
