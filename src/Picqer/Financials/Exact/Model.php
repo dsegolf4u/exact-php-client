@@ -209,17 +209,10 @@ abstract class Model
         return $this->collectionFromResult($result);
     }
 
-    public function getByModel($model)
-    {
-        $result = $this->connection()->get($this->url);
 
-        return $this->collectionFromResult($result, $model);
-    }
-
-    public function collectionFromResult($result, $model=null)
+    public function collectionFromResult($result)
     {
-        if ($model==null)
-            $model = get_class($this);
+        $model = get_class($this);
 
         $collection = array();
         foreach ($result as $r) {

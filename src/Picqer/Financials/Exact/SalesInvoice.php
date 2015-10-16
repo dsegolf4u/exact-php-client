@@ -63,12 +63,4 @@ class SalesInvoice extends Model
 
     protected $url = 'salesinvoice/SalesInvoices';
 
-
-    public function getSalesInvoiceLines($salesInvoiceId)
-    {
-        $this->url .= '(guid\'' . $salesInvoiceId . '\')/SalesInvoiceLines';
-
-        return $this->getByModel(get_class(new SalesInvoiceLine($this->connection)));
-    }
-
 }
