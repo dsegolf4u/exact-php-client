@@ -1,11 +1,13 @@
-<?php namespace Picqer\Financials\Exact;
+<?php 
+
+namespace Picqer\Financials\Exact;
 
 class Division extends Model
 {
 
-    use Query\Findable;
+    //use Query\Findable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'Code',
         'BlockingStatus',
         'Country',
@@ -27,7 +29,7 @@ class Division extends Model
         'TaxReferenceNumber',
         'VATNumber',
         'Website'
-    ];
+    );
 
     protected $url = 'hrm/Divisions';
 
