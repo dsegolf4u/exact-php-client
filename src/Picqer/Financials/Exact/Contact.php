@@ -27,7 +27,8 @@ class Contact extends Model
         'AccountMainContact',
         'IsMainContact',
         'Gender',
-        'Title'
+        'Title',
+        'Initials'
     );
 
     protected $url = 'crm/Contacts';
