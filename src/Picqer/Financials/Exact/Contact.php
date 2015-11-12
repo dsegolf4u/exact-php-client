@@ -7,6 +7,7 @@ class Contact extends Model
     //use Persistance\Storable;
 
     protected $fillable = array(
+        'ID',
         'Account',
         'AccountIsCustomer',
         'AccountIsSupplier',
