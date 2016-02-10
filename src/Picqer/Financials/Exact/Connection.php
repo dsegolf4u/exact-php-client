@@ -24,6 +24,7 @@ class Connection {
     private $refreshToken;
     private $redirectUrl;
     private $division;
+    private $nextUrl;
 
     /**
      * @var Client
@@ -59,6 +60,23 @@ class Connection {
         $result = $this->client()->send($request);
 
         return $this->parseResult($result);
+    }
+
+
+    public function getAll($url, array $params = array())
+    {
+        $data = $this->get($url, $params);
+
+        $nextUrl = $this->getNextUrl();
+        while (!empty($nextUrl)) {
+
+            $nextData = $this->get($nextUrl, $params);
+            $data = array_merge($data, $nextData);
+
+            $nextUrl = $this->getNextUrl();
+        }
+
+        return $data;
     }
 
     public function post($url, $body)
@@ -193,6 +211,10 @@ class Connection {
             $json = $response->json();
             if (array_key_exists('d', $json))
             {
+                if (array_key_exists('__next', $json['d'])) {
+                    $this->setNextUrl($json['d']['__next']);
+                }
+
                 if (array_key_exists('results', $json['d']))
                 {
                     if (count($json['d']['results']) == 1)
@@ -258,6 +280,20 @@ class Connection {
         $this->division = $division;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNextUrl()
+    {
+        return $this->nextUrl;
+    }
+
+    /**
+     * @param mixed $nextUrl
+     */
+    public function setNextUrl($nextUrl)
+    {
+        $this->nextUrl = $nextUrl;
+    }
+
 }
-
-

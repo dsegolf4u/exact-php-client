@@ -202,6 +202,30 @@ abstract class Model
     }
 
 
+    public function filterAll($filter, $expand = '', $select = '')
+    {
+        $request = array(
+            '$filter' => $filter
+        );
+        if (strlen($expand) > 0) {
+            $request['$expand'] = $expand;
+        }
+        if (strlen($select) > 0) {
+            $request['$select'] = $select;
+        }
+
+        $result = $this->connection()->getAll($this->url, $request);
+
+        // If we have one result which is not an assoc array, make it the first element of an array for the
+        // collectionFromResult function so we always return a collection from filter
+        if ((bool) count(array_filter(array_keys($result), 'is_string'))) {
+            $result = array($result);
+        }
+
+        return $this->collectionFromResult($result);
+    }
+
+
     public function get()
     {
         $result = $this->connection()->get($this->url);
