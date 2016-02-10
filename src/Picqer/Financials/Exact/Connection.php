@@ -206,6 +206,8 @@ class Connection {
 
     public function parseResult(Response $response)
     {
+        $this->setNextUrl('');
+        
         try
         {
             $json = $response->json();
