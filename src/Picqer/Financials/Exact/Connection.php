@@ -4,12 +4,8 @@ use CommerceGuys\Guzzle\Plugin\Oauth2\GrantType\AuthorizationCode;
 use CommerceGuys\Guzzle\Plugin\Oauth2\GrantType\RefreshToken;
 use CommerceGuys\Guzzle\Plugin\Oauth2\Oauth2Plugin;
 use Guzzle\Http\Client;
-use Guzzle\Http\Exception\ClientErrorResponseException;
 use Guzzle\Http\Exception\ServerErrorResponseException;
 use Guzzle\Http\Message\Response;
-use Guzzle\Log\ArrayLogAdapter;
-use Guzzle\Log\MessageFormatter;
-use Guzzle\Plugin\Log\LogPlugin;
 
 class Connection {
 
@@ -25,6 +21,9 @@ class Connection {
     private $redirectUrl;
     private $division;
     private $nextUrl;
+
+    private $lastRequest;
+    private $lastResponse;
 
     /**
      * @var Client
@@ -48,6 +47,8 @@ class Connection {
     {
         if ($url !== 'current/Me') $this->addDivisionNumberToApiUrl();
 
+        $this->clearLastRequestAndLastResponse();
+
         $request = $this->client()->createRequest('GET', $url);
 
         $query = $request->getQuery();
@@ -59,6 +60,7 @@ class Connection {
 
         $result = $this->client()->send($request);
 
+        $this->setLastRequestAndLastResponse($request, $result);
         return $this->parseResult($result);
     }
 
@@ -82,9 +84,13 @@ class Connection {
     public function post($url, $body)
     {
         $this->addDivisionNumberToApiUrl();
+        $this->clearLastRequestAndLastResponse();
         try
         {
-            $result = $this->client()->post($url, null, $body)->send();
+            $request = $this->client()->post($url, null, $body);
+            $result = $request->send();
+
+            $this->setLastRequestAndLastResponse($request, $result);
         } catch (ServerErrorResponseException $e)
         {
             throw new ApiException($e->getResponse()->getBody(true));
@@ -96,7 +102,11 @@ class Connection {
     public function put($url, $body)
     {
         $this->addDivisionNumberToApiUrl();
-        $result = $this->client()->put($url, null, $body)->send();
+        $this->clearLastRequestAndLastResponse();
+
+        $request = $this->client()->put($url, null, $body);
+        $result = $request->send();
+        $this->setLastRequestAndLastResponse($request, $result);
 
         return $this->parseResult($result);
     }
@@ -104,7 +114,11 @@ class Connection {
     public function delete($url)
     {
         $this->addDivisionNumberToApiUrl();
-        $result = $this->client()->delete($url)->send();
+        $this->clearLastRequestAndLastResponse();
+
+        $request = $this->client()->delete($url);
+        $result = $request->send();
+        $this->setLastRequestAndLastResponse($request, $result);
 
         return $this->parseResult($result);
     }
@@ -296,6 +310,51 @@ class Connection {
     public function setNextUrl($nextUrl)
     {
         $this->nextUrl = $nextUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastRequest()
+    {
+        return $this->lastRequest;
+    }
+
+    /**
+     * @param mixed $lastRequest
+     */
+    public function setLastRequest($lastRequest)
+    {
+        $this->lastRequest = $lastRequest;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastResponse()
+    {
+        return $this->lastResponse;
+    }
+
+    /**
+     * @param mixed $lastResponse
+     */
+    public function setLastResponse($lastResponse)
+    {
+        $this->lastResponse = $lastResponse;
+    }
+
+
+    private function setLastRequestAndLastResponse($request, $response)
+    {
+        $this->setLastRequest($request);
+        $this->setLastResponse($response);
+    }
+
+    private function clearLastRequestAndLastResponse()
+    {
+        $this->setLastRequest('');
+        $this->setLastResponse('');
     }
 
 }
