@@ -50,6 +50,7 @@ class Connection {
         $this->clearLastRequestAndLastResponse();
 
         $request = $this->client()->createRequest('GET', $url);
+        $this->setLastRequest($request);
 
         $query = $request->getQuery();
 
@@ -59,8 +60,8 @@ class Connection {
         }
 
         $result = $this->client()->send($request);
+        $this->setLastResponse($result);
 
-        $this->setLastRequestAndLastResponse($request, $result);
         return $this->parseResult($result);
     }
 
@@ -88,9 +89,11 @@ class Connection {
         try
         {
             $request = $this->client()->post($url, null, $body);
-            $result = $request->send();
+            $this->setLastRequest($request);
 
-            $this->setLastRequestAndLastResponse($request, $result);
+            $result = $request->send();
+            $this->setLastResponse($result);
+
         } catch (ServerErrorResponseException $e)
         {
             throw new ApiException($e->getResponse()->getBody(true));
@@ -105,8 +108,9 @@ class Connection {
         $this->clearLastRequestAndLastResponse();
 
         $request = $this->client()->put($url, null, $body);
+        $this->setLastRequest($request);
         $result = $request->send();
-        $this->setLastRequestAndLastResponse($request, $result);
+        $this->setLastResponse($result);
 
         return $this->parseResult($result);
     }
@@ -117,8 +121,9 @@ class Connection {
         $this->clearLastRequestAndLastResponse();
 
         $request = $this->client()->delete($url);
+        $this->setLastRequest($request);
         $result = $request->send();
-        $this->setLastRequestAndLastResponse($request, $result);
+        $this->setLastResponse($result);
 
         return $this->parseResult($result);
     }
@@ -342,13 +347,6 @@ class Connection {
     public function setLastResponse($lastResponse)
     {
         $this->lastResponse = $lastResponse;
-    }
-
-
-    private function setLastRequestAndLastResponse($request, $response)
-    {
-        $this->setLastRequest($request);
-        $this->setLastResponse($response);
     }
 
     private function clearLastRequestAndLastResponse()
