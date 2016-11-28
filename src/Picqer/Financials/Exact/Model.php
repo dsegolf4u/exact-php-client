@@ -156,6 +156,7 @@ abstract class Model
         $key = $this->primaryKey;
         $primarykey = $this->$key;
 
+        unset($this->$key);
         return $this->connection()->put($this->url . "(guid'$primarykey')", $this->json());
     }
 
