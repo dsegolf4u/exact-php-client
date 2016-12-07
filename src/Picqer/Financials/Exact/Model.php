@@ -156,9 +156,6 @@ abstract class Model
         $key = $this->primaryKey;
         $primarykey = $this->$key;
 
-        if (!empty($this->attributes[$this->primaryKey]))
-            unset($this->attributes[$this->primaryKey]);
-
         return $this->connection()->put($this->url . "(guid'$primarykey')", $this->json());
     }
 
@@ -243,6 +240,7 @@ abstract class Model
 
         $collection = array();
         foreach ($result as $r) {
+            $attr = !is_array($r) ? array($r) : $r;
             $collection[] = new $model($this->connection(), $r);
         }
 
