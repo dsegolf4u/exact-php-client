@@ -8,9 +8,9 @@ class SalesEntry extends Model
 
     protected $primaryKey = 'EntryID';
 
-    protected $saleEntryLines = [ ];
+    protected $saleEntryLines = array();
 
-    protected $fillable = [
+    protected $fillable = array(
         'Division',
         'Currency',
         'EntryDate',
@@ -27,7 +27,7 @@ class SalesEntry extends Model
         'Description',
         'Status',
         'PaymentCondition'
-    ];
+    );
 
 
     public function addItem(array $array)

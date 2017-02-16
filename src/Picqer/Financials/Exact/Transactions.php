@@ -3,10 +3,10 @@
 class Transactions extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'ClosingBalanceFC',
         'Date',
         'Description',
@@ -24,7 +24,7 @@ class Transactions extends Model
         'TransactionLines',
         'Type',
         'TypeDescription'
-    ];
+    );
 
     protected $url = 'financialtransaction/Transactions';
 }

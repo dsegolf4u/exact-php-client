@@ -3,10 +3,10 @@
 class SalesEntryLine extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'AmountDC',
         'Description',
         'Division',
@@ -21,7 +21,7 @@ class SalesEntryLine extends Model
         'VATPercentage',
         'Notes',
 
-    ];
+    );
 
     protected $url = 'salesinvoice/SalesInvoiceLines';
 
