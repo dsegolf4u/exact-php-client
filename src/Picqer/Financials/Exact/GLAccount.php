@@ -3,10 +3,10 @@
 class GLAccount extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'ID',
         'AssimildatedVATBox',
         'BalanceSide',
@@ -47,7 +47,7 @@ class GLAccount extends Model
         'VATSystem',
         'YearEndCostGLAccount',
         'YearEndReflectionGLAccount'
-    ];
+    );
 
     protected $url = 'financial/GLAccounts';
 

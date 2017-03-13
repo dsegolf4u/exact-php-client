@@ -3,9 +3,9 @@
 class VatCode extends Model
 {
 
-    use Query\Findable;
+    //use Query\Findable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'Account',
         'Code',
         'Country',
@@ -13,7 +13,7 @@ class VatCode extends Model
         'Description',
         'Division',
         'Percentage'
-    ];
+    );
 
     protected $url = 'vat/VATCodes';
 

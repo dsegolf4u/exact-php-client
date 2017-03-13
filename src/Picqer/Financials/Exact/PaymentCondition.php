@@ -3,10 +3,10 @@
 class PaymentCondition extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
-    protected $fillable = [
+    protected $fillable = array(
         'ID',
         'Code',
         'Created',
@@ -29,7 +29,7 @@ class PaymentCondition extends Model
         'PaymentMethod',
         'Percentage',
         'VATCalculation'
-    ];
+    );
 
     protected $url = 'cashflow/PaymentConditions';
 
