@@ -3,14 +3,14 @@
 class SalesEntry extends Model
 {
 
-    use Query\Findable;
-    use Persistance\Storable;
+    //use Query\Findable;
+    //use Persistance\Storable;
 
     protected $primaryKey = 'EntryID';
 
-    protected $saleEntryLines = [ ];
+    protected $saleEntryLines = array();
 
-    protected $fillable = [
+    protected $fillable = array(
         'Division',
         'Currency',
         'EntryDate',
@@ -27,13 +27,13 @@ class SalesEntry extends Model
         'Description',
         'Status',
         'PaymentCondition'
-    ];
+    );
 
 
     public function addItem(array $array)
     {
         if ( ! isset( $this->attributes['SalesEntryLines'] ) || $this->attributes['SalesEntryLines'] == null) {
-            $this->attributes['SalesEntryLines'] = [ ];
+            $this->attributes['SalesEntryLines'] = array();
         }
         if ( ! isset( $array['LineNumber'] )) {
             $array['LineNumber'] = count($this->attributes['SalesEntryLines']) + 1;
