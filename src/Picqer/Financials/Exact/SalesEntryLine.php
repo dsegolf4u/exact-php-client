@@ -7,7 +7,7 @@ class SalesEntryLine extends Model
     //use Persistance\Storable;
 
     protected $fillable = array(
-        'AmountDC',
+        'AmountFC',
         'Description',
         'Division',
         'ID',
@@ -23,6 +23,6 @@ class SalesEntryLine extends Model
 
     );
 
-    protected $url = 'salesinvoice/SalesInvoiceLines';
+    protected $url = 'salesentry/SalesEntryLines';
 
 }
