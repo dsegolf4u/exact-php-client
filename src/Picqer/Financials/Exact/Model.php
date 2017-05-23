@@ -234,6 +234,14 @@ abstract class Model
     }
 
 
+    public function getAll()
+    {
+        $result = $this->connection()->getAll($this->url);
+
+        return $this->collectionFromResult($result);
+    }
+
+
     public function collectionFromResult($result)
     {
         $model = get_class($this);
