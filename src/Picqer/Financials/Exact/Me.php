@@ -24,7 +24,7 @@ class Me extends Model
     );
 
 
-    public function find()
+    public function find($id=null)
     {
         $result = $this->connection()->get('current/Me');
 
