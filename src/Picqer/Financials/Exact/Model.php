@@ -130,7 +130,14 @@ abstract class Model
 
     public function json()
     {
-        return json_encode($this->attributes);
+        $attrs = $this->attributes;
+
+        // ID weghalen, mag niet meer meegestuurd worden.
+        if (array_key_exists($this->primaryKey, $attrs)) {
+            unset($attrs[$this->primaryKey]);
+        }
+
+        return json_encode($attrs);
     }
 
     public function save()
