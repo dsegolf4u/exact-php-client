@@ -256,7 +256,7 @@ abstract class Model
         $collection = array();
         foreach ($result as $r) {
             $attr = !is_array($r) ? array($r) : $r;
-            $collection[] = new $model($this->connection(), $r);
+            $collection[] = new $model($this->connection(), $attr);
         }
 
         return $collection;
