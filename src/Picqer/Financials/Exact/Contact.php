@@ -28,6 +28,7 @@ class Contact extends Model
         'IsMainContact',
         'Gender',
         'Title',
+        'Mobile',
         'Initials'
     );
 
