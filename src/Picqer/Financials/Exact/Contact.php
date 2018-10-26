@@ -15,6 +15,7 @@ class Contact extends Model
         'AddressStreet',
         'AddressStreetNumber',
         'FirstName',
+        'MiddleName',
         'LastName',
         'Phone',
         'Postcode',
