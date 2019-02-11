@@ -21,7 +21,8 @@ class Address extends Model
         'Country',
         'Postcode',
         'State',
-        'Type'
+        'Type',
+        'Main'
     );
 
     protected $url = 'crm/Addresses';
